@@ -1,0 +1,131 @@
+/* =========================================================
+   LOGIN SCREEN
+========================================================== */
+#screenLogin {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background:
+    radial-gradient(circle at 18% 14%, rgba(15, 118, 110, 0.35), transparent 45%),
+    radial-gradient(circle at 84% 86%, rgba(59, 77, 184, 0.3), transparent 50%),
+    var(--login-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--login-bg-2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 36px 30px 28px;
+  text-align: center;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+}
+.login-mark {
+  width: 54px;
+  height: 54px;
+  border-radius: 13px;
+  margin: 0 auto 16px;
+  background: linear-gradient(135deg, var(--teal), var(--indigo));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Sora", sans-serif;
+  font-weight: 700;
+  color: #fff;
+  font-size: 20px;
+}
+.login-card h1 {
+  color: #fff;
+  font-size: 19px;
+  margin: 0 0 4px;
+  font-weight: 700;
+}
+.login-card .login-sub {
+  color: #9fb3ac;
+  font-size: 12.5px;
+  margin-bottom: 26px;
+}
+.pin-dots {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: 22px;
+  height: 16px;
+}
+.pin-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid #4c6760;
+  transition: all 0.15s;
+}
+.pin-dot.filled {
+  background: var(--teal);
+  border-color: var(--teal);
+}
+.pin-dot.error {
+  background: var(--rust);
+  border-color: var(--rust);
+}
+.pin-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.pin-key {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-size: 19px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Sora", sans-serif;
+  transition: background 0.12s, transform 0.08s;
+}
+.pin-key:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.pin-key:active {
+  transform: scale(0.92);
+}
+.pin-key.fn {
+  font-size: 13px;
+  color: #9fb3ac;
+}
+.login-hint {
+  margin-top: 18px;
+  font-size: 11.5px;
+  color: #7d938c;
+}
+.login-card.shake {
+  animation: loginShake 0.4s;
+}
+@keyframes loginShake {
+  10%,
+  90% {
+    transform: translateX(-3px);
+  }
+  20%,
+  80% {
+    transform: translateX(4px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-7px);
+  }
+  40%,
+  60% {
+    transform: translateX(7px);
+  }
+}

@@ -1,0 +1,137 @@
+/* ===== Mobile tabs ===== */
+.mobile-tabs {
+  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--bg);
+  padding: 10px 16px 0;
+  gap: 8px;
+}
+.mobile-tab-btn {
+  flex: 1;
+  padding: 10px 0;
+  text-align: center;
+  font-weight: 700;
+  font-size: 13px;
+  border: 1px solid var(--line-strong);
+  background: #fff;
+  color: var(--ink-soft);
+  border-radius: 7px 7px 0 0;
+  cursor: pointer;
+  font-family: "Sora", sans-serif;
+}
+.mobile-tab-btn.active {
+  background: var(--surface);
+  color: var(--ink);
+  border-bottom-color: var(--surface);
+}
+
+/* =========================================================
+   TABLET — 768–1023px
+========================================================== */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .layout {
+    padding: 18px;
+  }
+  .scan-card {
+    padding: 18px;
+  }
+  .scan-card-name {
+    font-size: 19px;
+  }
+  .field-input {
+    padding: 13px 14px;
+    font-size: 15.5px;
+  }
+  .seg-btn {
+    padding: 14px 10px;
+    font-size: 14px;
+  }
+  .btn {
+    padding: 15px 16px;
+    font-size: 15.5px;
+  }
+}
+
+/* =========================================================
+   MOBILE — max 767px
+========================================================== */
+@media (max-width: 767px) {
+  .topbar {
+    padding: 11px 14px;
+  }
+  .topbar-title {
+    font-size: 13.5px;
+  }
+  .topbar-sub {
+    display: none;
+  }
+  .topbar-user {
+    display: none;
+  }
+  .stepper {
+    top: 58px;
+  }
+  .layout {
+    padding: 0 0 96px;
+    gap: 0;
+  }
+  .mobile-tabs {
+    display: flex;
+    top: 101px;
+  }
+  .panel-form,
+  .panel-log {
+    display: none;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    margin: 0;
+    box-shadow: none;
+  }
+  .panel-form.active,
+  .panel-log.active {
+    display: block;
+  }
+  .panel-body {
+    padding: 14px;
+  }
+  .panel-head {
+    display: none;
+  }
+  .field-input {
+    font-size: 16px;
+    padding: 12px 13px;
+  }
+  .seg-btn {
+    min-width: 80px;
+    font-size: 13px;
+    padding: 12px 8px;
+  }
+  .btn-group {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    border-top: 1px solid var(--line);
+    padding: 10px 14px;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    margin: 0;
+    z-index: 50;
+    box-shadow: 0 -4px 14px rgba(20, 30, 30, 0.08);
+  }
+  .log-table-wrap {
+    display: none;
+  }
+  .device-note {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  .card-list {
+    display: none;
+  }
+}

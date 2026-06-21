@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap");
+
+:root {
+  --bg: #f4f5f0;
+  --surface: #ffffff;
+  --surface-alt: #ebeee4;
+  --ink: #1a2420;
+  --ink-soft: #5b6962;
+  --ink-faint: #94a199;
+  --line: #dce1d5;
+  --line-strong: #c4ccba;
+  --teal: #0f766e;
+  --teal-dark: #0a5852;
+  --teal-soft: #def0ec;
+  --indigo: #3b4db8;
+  --indigo-soft: #e7e9f8;
+  --rust: #bf432e;
+  --rust-soft: #f9e5e0;
+  --amber: #bd841d;
+  --amber-soft: #f5ead2;
+  --login-bg: #10201c;
+  --login-bg-2: #16302a;
+  --radius: 7px;
+  --shadow-sm: 0 1px 2px rgba(16, 24, 20, 0.07);
+  --shadow-md: 0 8px 24px rgba(16, 24, 20, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+h1,
+h2,
+h3,
+.display {
+  font-family: "Sora", sans-serif;
+}
+.mono {
+  font-family: "JetBrains Mono", monospace;
+}
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}

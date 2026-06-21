@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Telly Scan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="css/table.css" />
+    <link rel="stylesheet" href="css/mobile.css" />
+    <link rel="stylesheet" href="css/toast.css" />
+  </head>
+  <body>
+    <!-- ===================== LOGIN SCREEN ===================== -->
+    <div id="screenLogin">
+      <div class="login-card" id="loginCard">
+        <div class="login-mark">TP</div>
+        <h1>Telly Scan</h1>
+        <div class="login-sub">Login Admin / Supervisor untuk melanjutkan</div>
+        <div class="pin-dots" id="pinDots">
+          <div class="pin-dot"></div>
+          <div class="pin-dot"></div>
+          <div class="pin-dot"></div>
+          <div class="pin-dot"></div>
+        </div>
+        <div class="pin-keypad">
+          <button class="pin-key" onclick="pinPress('1')">1</button>
+          <button class="pin-key" onclick="pinPress('2')">2</button>
+          <button class="pin-key" onclick="pinPress('3')">3</button>
+          <button class="pin-key" onclick="pinPress('4')">4</button>
+          <button class="pin-key" onclick="pinPress('5')">5</button>
+          <button class="pin-key" onclick="pinPress('6')">6</button>
+          <button class="pin-key" onclick="pinPress('7')">7</button>
+          <button class="pin-key" onclick="pinPress('8')">8</button>
+          <button class="pin-key" onclick="pinPress('9')">9</button>
+          <button class="pin-key fn" onclick="pinClear()">Hapus</button>
+          <button class="pin-key" onclick="pinPress('0')">0</button>
+          <button class="pin-key fn" onclick="pinBackspace()">⌫</button>
+        </div>
+        <div class="login-hint">
+          Simulasi login — gunakan PIN <span class="mono">0000</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== MAIN APP ===================== -->
+    <div id="screenApp">
+      <div class="app">
+        <div class="topbar">
+          <div class="topbar-brand">
+            <div class="topbar-mark">TP</div>
+            <div>
+              <div class="topbar-title">Telly Produk Pro</div>
+              <div class="topbar-sub">Sinkron otomatis ke Google Sheets</div>
+            </div>
+          </div>
+          <div class="topbar-right">
+            <div class="topbar-user">
+              <b id="topbarSpvName">Belum dipilih</b>Supervisor aktif
+            </div>
+            <button class="btn-logout" onclick="logout()">Keluar</button>
+          </div>
+        </div>
+
+        <!-- Sequential procedure stepper -->
+        <div class="stepper" id="stepper"></div>
+
+        <!-- Mobile tabs -->
+        <div class="mobile-tabs">
+          <button
+            class="mobile-tab-btn active"
+            id="tabBtnForm"
+            onclick="switchTab('form')"
+          >
+            📋 Form Input
+          </button>
+          <button
+            class="mobile-tab-btn"
+            id="tabBtnLog"
+            onclick="switchTab('log')"
+          >
+            📑 Riwayat Hari Ini <span id="tabLogCount" class="mono"></span>
+          </button>
+        </div>
+
+        <div class="layout">
+          <!-- ===== PANEL FORM ===== -->
+          <div class="panel panel-form active" id="panelForm">
+            <div class="panel-head"><h2>Form Input Produksi</h2></div>
+            <div class="panel-body">
+              <div class="field">
+                <label
+                  ><span class="field-step-no">2</span>Tanggal Produksi</label
+                >
+                <input
+                  class="field-input mono"
+                  type="date"
+                  id="inpTanggal"
+                  oninput="onFieldChange()"
+                />
+              </div>
+
+              <div class="field">
+                <label
+                  ><span class="field-step-no">3</span>Nama Supervisor /
+                  SPV</label
+                >
+                <select
+                  class="field-input"
+                  id="selSpv"
+                  onchange="onSpvChange()"
+                >
+                  <option value="">— Pilih supervisor —</option>
+                  <option value="Al Acthur">Al acthur</option>
+                  <option value="Rini Setyowati">Rini Setyowati</option>
+                  <option value="Dedi Setiadi">Dedi Setiadi</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label
+                  ><span class="field-step-no">4</span>Komoditas / Jenis
+                  Produk</label
+                >
+                <div class="segmented" id="segKomoditas">
+                  <button
+                    class="seg-btn"
+                    data-val="PDTO"
+                    onclick="selectKomoditas('PDTO')"
+                  >
+                    PDTO
+                  </button>
+                  <button
+                    class="seg-btn"
+                    data-val="PND"
+                    onclick="selectKomoditas('PND')"
+                  >
+                    PND
+                  </button>
+                  <button
+                    class="seg-btn"
+                    data-val="Ez-peel BU"
+                    onclick="selectKomoditas('Ez-peel BU')"
+                  >
+                    Ez-peel BU
+                  </button>
+                  <button
+                    class="seg-btn"
+                    data-val="Ez-not vain"
+                    onclick="selectKomoditas('Ez-not vain')"
+                  >
+                    Ez-not vain
+                  </button>
+                </div>
+              </div>
+
+              <div
+                style="height: 1px; background: var(--line); margin: 18px 0"
+              ></div>
+
+              <div class="field">
+                <label
+                  ><span class="field-step-no">5</span>Barcode ID
+                  Manpower</label
+                >
+                <div class="scan-row">
+                  <input
+                    class="field-input mono"
+                    id="inpBarcode"
+                    placeholder="Scan atau ketik ID lalu tekan Enter..."
+                    autocomplete="off"
+                  />
+                  <button
+                    class="btn-camera"
+                    id="btnCamera"
+                    title="Simulasi Scan Kamera"
+                    onclick="simulateCameraScan()"
+                  >
+                    📷
+                  </button>
+                </div>
+              </div>
+
+              <div class="scan-card" id="scanCard">
+                <div class="scan-card-placeholder" id="scanCardEmpty">
+                  Belum ada karyawan di-scan.
+                </div>
+                <div id="scanCardFilled" style="display: none">
+                  <div class="scan-card-name" id="scanName">—</div>
+                  <div class="scan-card-meta" id="scanMeta">—</div>
+                </div>
+              </div>
+
+              <div class="field">
+                <label><span class="field-step-no">6</span>Size / Ukuran</label>
+                <div class="segmented" id="segSize">
+                  <button
+                    class="seg-btn"
+                    data-val="Kecil"
+                    onclick="selectSize('Kecil')"
+                  >
+                    Kecil
+                  </button>
+                  <button
+                    class="seg-btn"
+                    data-val="Medium"
+                    onclick="selectSize('Medium')"
+                  >
+                    Medium
+                  </button>
+                  <button
+                    class="seg-btn"
+                    data-val="Besar"
+                    onclick="selectSize('Besar')"
+                  >
+                    Besar
+                  </button>
+                </div>
+              </div>
+
+              <div class="field">
+                <label
+                  ><span class="field-step-no">6</span>Jumlah Hasil Kerja</label
+                >
+                <input
+                  class="field-input mono"
+                  type="number"
+                  id="inpJumlah"
+                  min="1"
+                  placeholder="Masukkan total pcs..."
+                  oninput="onFieldChange()"
+                />
+              </div>
+
+              <div class="btn-group">
+                <button class="btn btn-secondary" onclick="resetForm()">
+                  ↺ Bersihkan Form
+                </button>
+                <button class="btn btn-primary" onclick="submitEntry()">
+                  ☁ Simpan ke Google Sheet
+                </button>
+              </div>
+              <div class="sync-status" id="syncStatus">
+                <span class="sync-dot"></span>
+                <span id="syncStatusText"
+                  >Belum ada data tersinkron pada sesi ini</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== PANEL LOG ===== -->
+          <div class="panel panel-log" id="panelLog">
+            <div class="panel-head">
+              <h2>Riwayat Data Hari Ini</h2>
+              <span class="count-pill mono" id="logCountPill">0 entri</span>
+            </div>
+            <div class="panel-body" style="padding: 0">
+              <div class="log-table-wrap">
+                <table class="log-table" id="logTable">
+                  <thead>
+                    <tr>
+                      <th>Tanggal</th>
+                      <th>Jam Input</th>
+                      <th>Supervisor</th>
+                      <th>ID Manpower</th>
+                      <th>Nama Manpower</th>
+                      <th>Jenis Produk</th>
+                      <th>Size</th>
+                      <th>Hasil (Pcs)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="logTableBody"></tbody>
+                </table>
+                <div class="empty-state" id="emptyStateDesktop">
+                  <div class="icon">📦</div>
+                  <p>
+                    Belum ada data. Lengkapi alur form lalu simpan untuk mulai
+                    mencatat.
+                  </p>
+                </div>
+              </div>
+              <div class="card-list" id="cardList" style="padding: 14px"></div>
+              <div
+                class="empty-state"
+                id="emptyStateMobile"
+                style="display: none"
+              >
+                <div class="icon">📦</div>
+                <p>Belum ada data. Lengkapi form di tab Form Input.</p>
+              </div>
+              <div style="padding: 0 14px 14px">
+                <button class="json-toggle" onclick="toggleJson()">
+                  <span>{ } Lihat JSON Payload (siap kirim ke Google SheetsAPI)</span>
+                  <span id="jsonToggleIcon">▾</span>
+                </button>
+                <div class="json-box" id="jsonBox">
+                  <pre id="jsonContent">[]</pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="device-note">
+          Telly Produk Pro — tampilan otomatis menyesuaikan lebar layar (Desktop
+          / Tablet / Mobile)
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-stack" id="toastStack"></div>
+
+    <!-- Scripts: order matters, config/toast/stepper before modules that use them -->
+    <script src="js/config.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/form.js"></script>
+    <script src="js/stepper.js"></script>
+    <script src="js/barcode.js"></script>
+    <script src="js/camera.js"></script>
+    <script src="js/table.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
