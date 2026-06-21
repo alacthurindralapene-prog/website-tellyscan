@@ -1,2 +1,0 @@
-# website-tellyscan
-website tellyscan
