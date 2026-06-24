@@ -79,3 +79,36 @@ function stopCameraScan() {
       });
   }
 }
+// ... (kode bagian atas tetap sama)
+
+  // Jendela kamera muncul
+  cameraContainer.style.display = "block";
+
+  html5QrCodeScanner = new Html5Qrcode("camera-container");
+
+  // --- PERBAIKAN DI BAGIAN CONFIG INI ---
+  const config = {
+    fps: 15, // Dinaikkan sedikit agar scanning barcode garis lebih sensitif
+    qrbox: { width: 300, height: 150 }, // Kotak disesuaikan menjadi persegi panjang agar pas dengan bentuk barcode garis
+    
+    // Wajib daftarkan format CODE_39 agar library mengaktifkan sensor barcode garis
+    formatsToSupport: [ 
+      Html5QrcodeSupportedFormats.CODE_39,
+      Html5QrcodeSupportedFormats.QR_CODE // Tetap dukung QR Code jika sewaktu-waktu butuh
+    ]
+  };
+  // --------------------------------------
+
+  const onScanSuccess = (decodedText, decodedResult) => {
+    // Hasil scan barcode Code 39 biasanya otomatis mengikutsertakan tanda bintang (*) di hasilnya.
+    // Kita bersihkan tanda bintangnya agar teksnya bersih saat masuk ke input field.
+    const cleanText = decodedText.replace(/\*/g, ""); 
+
+    inpBarcode.value = cleanText;
+    lookupBarcode(cleanText);
+    
+    showToast("Barcode berhasil dideteksi!", "success");
+    stopCameraScan();
+  };
+
+  // ... (sisa kode ke bawah seperti stopCameraScan() tetap sama seperti sebelumnya)
