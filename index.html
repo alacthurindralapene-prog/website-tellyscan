@@ -117,8 +117,6 @@
                 >
                   <option value="">— Pilih supervisor —</option>
                   <option value="Al Acthur">Al acthur</option>
-                  <option value="Rini Setyowati">Rini Setyowati</option>
-                  <option value="Dedi Setiadi">Dedi Setiadi</option>
                 </select>
               </div>
 
@@ -175,14 +173,33 @@
                     placeholder="Scan atau ketik ID lalu tekan Enter..."
                     autocomplete="off"
                   />
-                  <button
-                    class="btn-camera"
-                    id="btnCamera"
-                    title="Simulasi Scan Kamera"
-                    onclick="simulateCameraScan()"
-                  >
-                    📷
-                  </button>
+                  <script
+                    src="https://unpkg.com/html5-qrcode"
+                    type="text/javascript"
+                  ></script>
+
+                  <div class="camera-wrapper" style="text-align: center">
+                    <button
+                      class="btn-camera"
+                      id="btnCamera"
+                      title="Scan Kamera Barcode"
+                      onclick="startRealCameraScan()"
+                    >
+                      📷
+                    </button>
+
+                    <div
+                      id="camera-container"
+                      style="
+                        width: 100%;
+                        max-width: 400px;
+                        margin: 15px auto;
+                        display: none;
+                        border-radius: 8px;
+                        overflow: hidden;
+                        border: 2px solid #ccc;
+                      "
+                    ></div>
                 </div>
               </div>
 
